@@ -21,6 +21,8 @@ export default class Execute extends Component {
       if(this.props.onExecute) {
         this.props.onExecute()
       }
+      // remove 'undefined' from path segments
+      path = path.replace(/\/undefined/, '')
       specActions.execute( { operation, path, method } )
     }
   }
