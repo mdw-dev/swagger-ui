@@ -112,6 +112,12 @@ export default class ParamBody extends Component {
 
     let { value, isEditBox } = this.state
 
+    if (parameter.get('format') == 'wrap') {
+      let prefix = '{"' + parameter.get('name') + '": ';
+      if (!value.startsWith(prefix))
+        value = prefix + value + '}';
+    }
+    
     return (
       <div className="body-param">
         {
