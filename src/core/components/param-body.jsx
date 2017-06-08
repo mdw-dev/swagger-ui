@@ -76,6 +76,13 @@ export default class ParamBody extends Component {
   }
 
   onChange = (value, { isEditBox, isXml }) => {
+    if (isEditBox && this.props.param.get('format') == 'wrap') {
+      let prefix = '{"' + this.props.param.get('name') + '": ';
+      if (!value.startsWith(prefix)) {
+        value = prefix + value + '}';
+      }
+    }
+  
     this.setState({value, isEditBox})
     this._onChange(value, isXml)
   }
@@ -114,8 +121,9 @@ export default class ParamBody extends Component {
 
     if (parameter.get('format') == 'wrap') {
       let prefix = '{"' + parameter.get('name') + '": ';
-      if (!value.startsWith(prefix))
+      if (!value.startsWith(prefix)) {
         value = prefix + value + '}';
+      }
     }
     
     return (
